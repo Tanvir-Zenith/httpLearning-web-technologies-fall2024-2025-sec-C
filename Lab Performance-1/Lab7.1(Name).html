@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="nameForm">
+        <label for="name"><strong>Name</strong></label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <button type="submit">Submit</button>
+        <p id="error-message" class="error"></p>
+    </form>
+
+    <script>
+        document.getElementById("nameForm").addEventListener("submit", function(event) 
+        {
+            event.preventDefault();
+            let nameInput = document.getElementById("name").value.trim();
+            let errorMessage = document.getElementById("error-message");
+
+            //let nameRegex = /^[A-Za-z][A-Za-z.\-]*\s[A-Za-z.\-]+$/;
+
+            if (nameInput === "") 
+            {
+                errorMessage.textContent = "Name cannot be empty.";
+            } else if (!nameInput.match(nameRegex)) 
+            {
+                errorMessage.textContent = "Invalid name. Must start with a letter, contain at least two words, and allow letters, dot (.), or dash (-).";
+            } else {
+                errorMessage.textContent = "";
+                alert("Form submitted successfully!");
+            }
+        });
+    </script>
+
+</body>
+</html>
