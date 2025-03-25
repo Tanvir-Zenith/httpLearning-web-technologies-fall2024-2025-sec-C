@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error 
+        {
+            color: red;
+        }
+        .tooltip 
+        {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 18px;
+            background-color: #f0f0f0;
+        }
+        .tooltip-text 
+        {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            padding: 5px;
+            font-size: 12px;
+            width: 180px;
+            top: 25px;
+            left: 20px;
+        }
+        .tooltip:hover .tooltip-text 
+        {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="emailForm">
+        <label for="email"><strong>Email</strong></label><br>
+        <input type="text" id="email" name="email">
+        <span class="tooltip">i
+            <span class="tooltip-text">hint: sample@example.com</span>
+        </span>
+        <br><br>
+        <button type="submit">Submit</button>
+        <p id="error-message" class="error"></p>
+    </form>
+
+    <script>
+        document.getElementById("emailForm").addEventListener("submit", function(event) 
+        {
+            event.preventDefault();
+            let emailInput = document.getElementById("email").value.trim();
+            let errorMessage = document.getElementById("error-message");
+
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (emailInput === "") 
+            {
+                errorMessage.textContent = "Email cannot be empty.";
+            } else if (!emailRegex.test(emailInput)) 
+            {
+                errorMessage.textContent = "Invalid email format. Must be like sample@example.com.";
+            } else 
+            {
+                errorMessage.textContent = "";
+                alert("Form submitted successfully!");
+                
+            }
+        });
+    </script>
+
+</body>
+</html>

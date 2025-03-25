@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gender Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error 
+        {
+            color: red;
+        }
+        fieldset 
+        {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="genderForm">
+        <fieldset>
+            <legend><strong>Gender</strong></legend>
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label>
+            
+            <input type="radio" id="other" name="gender" value="Other">
+            <label for="other">Other</label>
+        </fieldset>
+        <br>
+        <button type="submit">Submit</button>
+        <p id="error-message" class="error"></p>
+    </form>
+
+    <script>
+        document.getElementById("genderForm").addEventListener("submit", function(event) 
+        {
+            event.preventDefault();
+            let genderInputs = document.getElementsByName("gender");
+            let errorMessage = document.getElementById("error-message");
+            let selected = false;
+
+            for (let i = 0; i < genderInputs.length; i++) 
+            {
+                if (genderInputs[i].checked) 
+                {
+                    selected = true;
+                    break;
+                }
+            }
+
+            if (!selected) 
+            {
+                errorMessage.textContent = "Please select a gender.";
+            } else 
+            {
+                errorMessage.textContent = "";
+                alert("Form submitted successfully!");
+                
+            }
+        });
+    </script>
+
+</body>
+</html>

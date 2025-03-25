@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <script>
+        function validateForm() 
+        {
+            let valid = true;
+
+           // Degree Validation
+            let degrees = form.querySelectorAll("input[name='degree']:checked");
+            let degreeError = form.querySelector("#degreeError");
+            if (degreeError) degreeError.innerHTML = "";
+            if (form.querySelector("input[name='degree']") !== null) 
+            {
+                if (degrees.length === 0) 
+                {
+                    if (degreeError) degreeError.innerHTML = "At least one degree must be selected.";
+                    valid = false;
+                }
+            }
+
+             return valid;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <h4>Degree</h4>
+        <input type="checkbox" name="degree" value="SSC"> SSC
+        <input type="checkbox" name="degree" value="HSC"> HSC
+        <input type="checkbox" name="degree" value="BSc"> BSc
+        <br>
+        <span id="degreeError" style="color:red;"></span>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
