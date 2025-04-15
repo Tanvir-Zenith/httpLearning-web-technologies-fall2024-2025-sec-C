@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+</head>
+<body>
+
+  <h2>Calculator</h2>
+  <div id="display">0</div>
+  <div>
+    <button onclick="appendNumber('7')">7</button>
+    <button onclick="appendNumber('8')">8</button>
+    <button onclick="appendNumber('9')">9</button>
+    <button onclick="chooseOperation('/')">/</button>
+  </div>
+  <div>
+    <button onclick="appendNumber('4')">4</button>
+    <button onclick="appendNumber('5')">5</button>
+    <button onclick="appendNumber('6')">6</button>
+    <button onclick="chooseOperation('*')">*</button>
+  </div>
+  <div>
+    <button onclick="appendNumber('1')">1</button>
+    <button onclick="appendNumber('2')">2</button>
+    <button onclick="appendNumber('3')">3</button>
+    <button onclick="chooseOperation('-')">-</button>
+  </div>
+  <div>
+    <button onclick="appendNumber('0')">0</button>
+    <button onclick="appendNumber('.')">.</button>
+    <button onclick="compute()">=</button>
+    <button onclick="chooseOperation('+')">+</button>
+  </div>
+  <div>
+    <button onclick="percentage()">%</button>
+    <button onclick="clearDisplay()">C</button>
+  </div>
+
+  <script>
+    let currentInput = '';
+    let previousInput = '';
+    let operation = null;
+
+    const display = document.getElementById('display');
+
+    function appendNumber(number) {
+      if (number === '.' && currentInput.includes('.')) return;
+      currentInput += number;
+      updateDisplay();
+    }
+
+    function chooseOperation(op) {
+      if (currentInput === '') return;
+      if (previousInput !== '') {
+        compute();
+      }
+      operation = op;
+      previousInput = currentInput;
+      currentInput = '';
+    }
+
+    function compute() {
+      let result;
+      const prev = parseFloat(previousInput);
+      const current = parseFloat(currentInput);
+      if (isNaN(prev) || isNaN(current)) return;
+
+      switch (operation) {
+        case '+': result = prev + current; break;
+        case '-': result = prev - current; break;
+        case '*': result = prev * current; break;
+        case '/': result = current !== 0 ? prev / current : 'Error'; break;
+        default: return;
+      }
+
+      currentInput = result.toString();
+      operation = null;
+      previousInput = '';
+      updateDisplay();
+    }
+
+    function percentage() {
+      if (currentInput === '') return;
+      currentInput = (parseFloat(currentInput) / 100).toString();
+      updateDisplay();
+    }
+
+    function clearDisplay() {
+      currentInput = '';
+      previousInput = '';
+      operation = null;
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      display.innerText = currentInput || '0';
+    }
+  </script>
+
+</body>
+</html>
